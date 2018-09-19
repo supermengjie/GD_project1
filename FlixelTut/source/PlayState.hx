@@ -10,6 +10,7 @@ class PlayState extends FlxState
 	
 	override public function create():Void
 	{
+		//creates and adds a blimp to the screen
 		_blimp = new Blimp(20, 20);
 		add(_blimp);
 		_blimp.screenCenter();
