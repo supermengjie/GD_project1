@@ -10,8 +10,6 @@ class MenuState extends FlxState
 	
 	override public function create():Void
 	{
-		FlxG.resizeGame(1280, 720);
-		FlxG.resizeWindow(1280, 720);
 		_playButton = new FlxButton(0, 0, "Play!", clickPlay);
 		_playButton.screenCenter();
 		add(_playButton);

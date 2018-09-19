@@ -38,7 +38,7 @@ import haxe.macro.Expr;
 		
 		var config = {
 			
-			build: "5",
+			build: "53",
 			company: "HaxeFlixel",
 			file: "FlixelTut",
 			fps: 60,
@@ -64,7 +64,7 @@ import haxe.macro.Expr;
 					maximized: false,
 					minimized: false,
 					parameters: {},
-					resizable: true,
+					resizable: false,
 					stencilBuffer: true,
 					title: "FlixelTut",
 					vsync: false,
@@ -110,7 +110,7 @@ import haxe.macro.Expr;
 		#if (lime >= "7.0.0")
 		ManifestResources.init (config);
 		
-		app.meta["build"] = "5";
+		app.meta["build"] = "53";
 		app.meta["company"] = "HaxeFlixel";
 		app.meta["file"] = "FlixelTut";
 		app.meta["name"] = "FlixelTut";
@@ -132,7 +132,7 @@ import haxe.macro.Expr;
 			maximized: false,
 			minimized: false,
 			parameters: {},
-			resizable: true,
+			resizable: false,
 			title: "FlixelTut",
 			width: 640,
 			x: null,
