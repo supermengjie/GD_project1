@@ -1,27 +1,26 @@
 -main ApplicationMain 
--cp C:/Users/cherns2/haxelib install openfl/flixel/4,5,1
--D flixel=4.5.1
+-cp C:/HaxeToolkit/haxe/lib/flixel/4,5,0
+-D flixel=4.5.0
 --macro openfl._internal.utils.ExtraParams.include()
--cp C:/Users/cherns2/haxelib install openfl/openfl/8,4,1/src
+-cp C:/HaxeToolkit/haxe/lib/openfl/8,4,1/src
 -D openfl=8.4.1
 --macro lime._internal.macros.DefineMacro.run()
--cp C:/Users/cherns2/haxelib install openfl/lime/7,0,0/src
+-cp C:/HaxeToolkit/haxe/lib/lime/7,0,0/src
 -D lime=7.0.0
 -cp source
--D lime-openal
--D native
--D lime-curl
--D openfl-native
 -D lime-harfbuzz
+-D lime-openal
 -D tools=7.0.0
 -D lime-cairo
--D FLX_NO_DEBUG
 -D lime-opengl
 -D no-compilation
 -D NAPE_RELEASE_BUILD
+-D native
 -D FLX_NO_TOUCH
+-D lime-curl
 -D lime-native
 -D lime-vorbis
+-D openfl-native
 -D lime-cffi
 -D windows
 -D desktop
