@@ -70,17 +70,26 @@
 			else if (_right){
 				angle = 0;
 			}
-			if ( ((_up && _right) && (this.y > 12 && this.x < 566)) || ((_up && _left) && (this.y > 12 && this.x > 12)) ||
+			
+			if (this.y >= 12 && this.y <= 406 && this.x >= 12 && this.x <= 406){
+				if (_up || _down || _left || _right){
+					velocity.set(_speed, 0);
+					velocity.rotate(FlxPoint.weak(0, 0), angle);
+					trace("X:", this.x, " Y:", this.y);
+				}
+			}
+			
+			/*if ( ((_up && _right) && (this.y > 12 && this.x < 566)) || ((_up && _left) && (this.y > 12 && this.x > 12)) ||
 				 ((_down && _right) && (this.y < 406 && this.x < 566)) || ((_down && _left) && (this.y < 406 && this.x > 12)) ){
 					velocity.set(_speed, 0);
 					velocity.rotate(FlxPoint.weak(0, 0), angle);
 					trace("X:", this.x, " Y:", this.y);
-				 }
+		    }
 			else if ( (_up && this.y > 16) || (_down && this.y < 406) || (_left && this.x > 16) || (_right && this.x < 566) ){
 				velocity.set(_speed, 0);
 				velocity.rotate(FlxPoint.weak(0, 0), angle);
 				trace("X:", this.x, " Y:", this.y);		
-			}
+			}*/
 			
 		}
 	}
