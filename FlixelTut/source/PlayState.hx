@@ -19,6 +19,7 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		FlxG.sound.play("assets/sounds/effects/blimp_sound.wav");
 		super.update(elapsed);
 	}
 }
