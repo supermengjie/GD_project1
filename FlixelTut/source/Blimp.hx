@@ -8,14 +8,16 @@
  class Blimp extends FlxSprite
  {
 	
-	 var _speed: Float = 200;
+	 var _speed: Float = 100;
 	 
      public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
      {
          super(X, Y, SimpleGraphic);
 		 //drag slowly deaccelerates movement when it stops so it doesnt randomly stop
-		 drag.x = drag.y = 1600;
-		 loadGraphic("assets/images/blimp.jpg", true, 64, 64);
+		 drag.x = drag.y = 1000;
+		 loadGraphic("assets/images/Blimp_SpriteSheet9.png", true, 128, 64);
+		 animation.add("blimpFloat", [0, 1, 2, 3, 4], 5, true);
+		 animation.play("blimpFloat");
      }
 	 
 	 override public function update(elapsed:Float):Void
@@ -75,18 +77,17 @@
 			}
 			
 			//For diagonal movements to keep blimp on the screen
-			if ( ((_up && _right) && (this.y > 12 && this.x < 566)) || ((_up && _left) && (this.y > 12 && this.x > 12)) ||
-				 ((_down && _right) && (this.y < 406 && this.x < 566)) || ((_down && _left) && (this.y < 406 && this.x > 12)) ){
-					velocity.set(_speed, 0);
-					velocity.rotate(FlxPoint.weak(0, 0), angle);
-					trace("X:", this.x, " Y:", this.y);
-		    }
-			//for straight up/down/left/right movements to keep blimp on the screen
-			else if ( (_up && this.y > 16 && !_left && !_right) || (_down && this.y < 406 && !_left && !_right) || 
-			          (_left && this.x > 16 && !_up && !_down) || (_right && this.x < 566 && !_up && !_down) ){
+			if ( ((_up && _right) && (this.y > 0 && this.x < 576)) || ((_up && _left) && (this.y > 0 && this.x > 0)) ||
+			((_down && _right) && (this.y < 416 && this.x < 576)) || ((_down && _left) && (this.y < 416 && this.x > 0)) ){
 				velocity.set(_speed, 0);
 				velocity.rotate(FlxPoint.weak(0, 0), angle);
-				trace("X:", this.x, " Y:", this.y);		
+		    }
+			
+			//for straight up/down/left/right movements to keep blimp on the screen
+			else if ( (_up && this.y > 0 && !_left && !_right) || (_down && this.y < 416 && !_left && !_right) || 
+			(_left && this.x > 0 && !_up && !_down) || (_right && this.x < 576 && !_up && !_down) ){
+				velocity.set(_speed, 0);
+				velocity.rotate(FlxPoint.weak(0, 0), angle);	
 			}
 			
 		}
