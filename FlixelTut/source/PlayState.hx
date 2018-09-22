@@ -30,7 +30,7 @@ class PlayState extends FlxState
 		add(_blimp);
 		_blimp.screenCenter();
 		//starts the loop of the bird spawner
-		spawn.start(FlxG.random.float(4.0, 8.0), birdSpawner, 3);
+		spawn.start(FlxG.random.float(1.0, 1.0), birdSpawner, 0);
 		super.create();
 	}
 
