@@ -4,6 +4,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 
 class PlayState extends FlxState
@@ -14,6 +15,8 @@ class PlayState extends FlxState
 	var _scrollSpeed : Float = -300;
 	var looped : Bool = false;
 	var looped2 : Bool = false;
+	//time in seconds, callback, loops
+	var spawn : FlxTimer = new FlxTimer();
 	
 	override public function create():Void
 	{
@@ -26,7 +29,8 @@ class PlayState extends FlxState
 		_blimp = new Blimp(20, 20);
 		add(_blimp);
 		_blimp.screenCenter();
-		
+		//starts the loop of the bird spawner
+		spawn.start(FlxG.random.float(4.0, 8.0), birdSpawner, 3);
 		super.create();
 	}
 
@@ -68,5 +72,13 @@ class PlayState extends FlxState
 		if (Std.int(bg2.x) == -1281){
 			bg2.velocity.set(0, 0);
 		}
+	}
+	function birdSpawner(Timer:FlxTimer):Void
+	{
+		//spawns birds
+		var _bird : Birds;
+		_bird = new Birds(FlxG.random.int(400, 620), 360, "flock");
+		add(_bird);
+		_bird.velocity.set(_scrollSpeed, 0);
 	}
 }
