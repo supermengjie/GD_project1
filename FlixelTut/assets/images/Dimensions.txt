@@ -1,0 +1,2 @@
+Tile - 32x32
+Window - 640x360
