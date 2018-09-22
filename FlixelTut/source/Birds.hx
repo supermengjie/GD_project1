@@ -22,7 +22,14 @@ class Birds extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	 {
+		 moving();
 		 super.update(elapsed);
+	 }
+	 
+	 function moving():Void
+	 {
+		 //t activates the movement for now
+		act= FlxG.keys.anyPressed([T]);
 	 }
 	 
 	
