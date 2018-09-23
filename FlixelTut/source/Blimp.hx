@@ -4,6 +4,7 @@
  import flixel.system.FlxAssets.FlxGraphicAsset;
  import flixel.FlxG;
  import flixel.math.FlxPoint;
+ import flixel.FlxObject;
 
  class Blimp extends FlxSprite
  {
@@ -16,6 +17,7 @@
 		 //drag slowly deaccelerates movement when it stops so it doesnt randomly stop
 		 drag.x = drag.y = 1000;
 		 loadGraphic("assets/images/Blimp_SpriteSheet9.png", true, 128, 64);
+		 facing = FlxObject.RIGHT;
 		 animation.add("blimpFloat", [0, 1, 2, 3, 4], 5, true);
 		 animation.play("blimpFloat");
      }

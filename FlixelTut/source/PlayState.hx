@@ -9,23 +9,44 @@ import flixel.util.FlxColor;
 class PlayState extends FlxState
 {
 	var _blimp : Blimp;
-	var bg : FlxSprite = new FlxSprite();
-	var bg2 : FlxSprite = new FlxSprite();
-	var _scrollSpeed : Float = -300;
-	var looped : Bool = false;
-	var looped2 : Bool = false;
+	var fg : FlxSprite = new FlxSprite();
+	var fg2 : FlxSprite = new FlxSprite();
+	var mg : FlxSprite = new FlxSprite();
+	var mg2 : FlxSprite = new FlxSprite();
+	var sky : FlxSprite = new FlxSprite();
+	var _scrollSpeed : Float = -75;
 	
 	override public function create():Void
 	{
-		bg.loadGraphic("assets/images/bg-test.png", false, 1280, 480);
-		bg2.loadGraphic("assets/images/bg-test.png", false, 1280, 480);
-		add(bg);
-		add(bg2);
-		bg2.x = 640;
-		bg.velocity.set(_scrollSpeed, 0);
+		//load in graphics and assign their x and y positions
+		fg.loadGraphic("assets/images/Background1_Houses_640.png", false, 512, 157);
+		fg2.loadGraphic("assets/images/Background1_Houses_640.png", false, 512, 157);
+		mg.loadGraphic("assets/images/Background2_MidgroundHouses_640.png", false, 348, 91);
+		mg2.loadGraphic("assets/images/Background2_MidgroundHouses_640.png", false, 348, 91);
+		sky.loadGraphic("assets/images/Background3_BackgroundSky.png", false, 640, 245);
+		add(sky);
+		add(mg);
+		add(mg2);
+		add(fg);
+		add(fg2);
+		fg.x = 0;
+		fg.y = 200;
+		fg2.x = 640;
+		fg2.y = 200;
+		mg.x = 0;
+		mg.y = 232;
+		mg2.x = 640;
+		mg2.y = 232;
+		fg.velocity.set(_scrollSpeed, 0);
+		fg2.velocity.set(_scrollSpeed, 0);
+		mg.velocity.set(_scrollSpeed, 0);
+		mg2.velocity.set(_scrollSpeed, 0);
+		
+		//create the blimp object and assign its position
 		_blimp = new Blimp(20, 20);
 		add(_blimp);
-		_blimp.screenCenter();
+		_blimp.x = 40;
+		_blimp.y = 100;
 		
 		super.create();
 	}
@@ -39,34 +60,18 @@ class PlayState extends FlxState
 	
 	function scroll():Void
 	{
-		//if the background X is at -640 add background2 to the right edge of the screen and add velocity
-		if (Std.int(bg.x) == -640 && !looped)
+		//when backgroundX reaches 0, move background2 and middleground2 to the right side of the screen
+		if (Std.int(fg.x) == 0)
 		{
-			bg2.x = 640;
-			bg2.velocity.set(_scrollSpeed, 0);
-			trace("duplicating");
-			trace("bgX: ", bg.x);
-			looped = true;
-			looped2 = false;
+			fg2.x = 640;
+			mg2.x = 640;
 		}
-		//if the background2 X is at -640 add background to the right edge of the screen and add velocity
-		if (Std.int(bg2.x) == -640 && !looped2)
+		//when background2X reaches 0, move background and middleground to the right side of the screen
+		if (Std.int(fg2.x) == 0)
 		{
-			bg.x = 640;
-			bg.velocity.set(_scrollSpeed, 0);
-			trace("duplicating2");
-			trace("bg2X: ", bg2.x);
-			looped2 = true;
-			looped = false;
+			fg.x = 640;
+			mg.x = 640;
 			
-		}
-		//stop the background from moving once it is off the screen
-		if (Std.int(bg.x) == -1281){
-			bg.velocity.set(0, 0);
-		}
-		//stop background2 from moving once it is off the screen
-		if (Std.int(bg2.x) == -1281){
-			bg2.velocity.set(0, 0);
 		}
 	}
 }
