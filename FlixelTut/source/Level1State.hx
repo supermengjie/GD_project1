@@ -6,7 +6,7 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 
 
-class PlayState extends FlxState
+class Level1State extends FlxState
 {
 	var _blimp : Blimp;
 	var fg : FlxSprite = new FlxSprite();
@@ -14,6 +14,10 @@ class PlayState extends FlxState
 	var mg : FlxSprite = new FlxSprite();
 	var mg2 : FlxSprite = new FlxSprite();
 	var sky : FlxSprite = new FlxSprite();
+	var timer : FlxSprite = new FlxSprite();
+	var timerBG : FlxSprite = new FlxSprite();
+	var brightGreen : FlxColor = new FlxColor(0x00ff00);
+	var curScale : Float = 1;
 	var _scrollSpeed : Float = -75;
 	
 	override public function create():Void
@@ -48,6 +52,16 @@ class PlayState extends FlxState
 		_blimp.x = 40;
 		_blimp.y = 60;
 		
+		timerBG.makeGraphic(75, 10, FlxColor.BLACK);
+		timerBG.x = 550;
+		timerBG.y = 15;
+		add(timerBG);
+		
+		timer.makeGraphic(75, 10, FlxColor.LIME);
+		timer.x = 550;
+		timer.y = 15;
+		add(timer);
+		
 		super.create();
 	}
 
@@ -55,6 +69,12 @@ class PlayState extends FlxState
 	{
 		FlxG.sound.play("assets/sounds/effects/blimp_sound.wav");
 		scroll();
+		if (FlxG.keys.justPressed.B){
+			decreaseTimer();
+		}
+		if (FlxG.keys.justPressed.N){
+			increaseTimer();
+		}
 		super.update(elapsed);
 	}
 	
@@ -73,5 +93,27 @@ class PlayState extends FlxState
 			mg.x = 640;
 			
 		}
+	}
+	
+	//if insult is shot decrease width of the timer and update hitbox
+	function decreaseTimer():Void
+	{
+		if(curScale - .2 <= 0){
+			curScale = 0;
+		}
+		else{
+			curScale -= .2;
+		}
+		
+		timer.scale.set(curScale, 1);
+		timer.updateHitbox();
+	}
+	
+	//if bird is destroyed increase width of timer and update hitbox
+	function increaseTimer():Void
+	{
+		curScale += .1;
+		timer.scale.set(curScale, 1);
+		timer.updateHitbox();
 	}
 }
