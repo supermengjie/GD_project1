@@ -17,9 +17,9 @@ class Birds extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?BirdType:String, ?BirdSkin:FlxGraphicAsset) 
 	{
 		super(X, Y, BirdSkin);
-		loadGraphic("assets/images/Blimp_SpriteSheet9.png", true, 128, 64);
-		animation.add("blimpFloat", [0, 1, 2, 3, 4], 5, true);
-		animation.play("blimpFloat");
+		loadGraphic("assets/images/BirdFlock_SpriteSheet.png", true, 23, 20);
+		animation.add("birdMove", [0, 1, 0, 2], 8, true);
+		animation.play("birdMove");
 	}
 	public function move():Void
 	{
