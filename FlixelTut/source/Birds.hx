@@ -11,8 +11,6 @@ import flixel.math.FlxPoint;
  */
 class Birds extends FlxSprite
 {
-	var _speed : Float = 200;
-	var hit : Bool = false;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?BirdType:String, ?BirdSkin:FlxGraphicAsset) 
 	{
@@ -21,22 +19,11 @@ class Birds extends FlxSprite
 		animation.add("birdMove", [0, 1, 0, 2], 8, true);
 		animation.play("birdMove");
 	}
-	public function move():Void
-	{
-		var act:Bool = false;
-		act = FlxG.keys.anyPressed([T]);
-		if (act && !hit) 
-		{
-			velocity.set(200, -100);
-			hit = true;
-		}
-		
-	}
+	
 	override public function update(elapsed:Float):Void
 	 {
-		move();
-		 //once the bird hits the edge of the screen and is in the middle
-		if (this.x>620 && this.y<190 && hit)
+		 moving();
+		 if (this.x>620 && this.y<190)
 		{
 			trace("out");
 			velocity.set( -100, 0);
@@ -46,8 +33,14 @@ class Birds extends FlxSprite
 		{
 			trace("kill");
 			this.kill();
-		}	
-		super.update(elapsed);
+		}
+		 super.update(elapsed);
+	 }
+	 
+	 function moving():Void
+	 {
+		 //t activates the movement for now
+		//act= FlxG.keys.anyPressed([T]);
 	 }
 	 
 	
