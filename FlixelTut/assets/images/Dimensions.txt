@@ -2,3 +2,5 @@ Tile - 32x32
 Window - 640x360
 Midground - 640x96
 Foreground - 640x160
+TitleScreen - 640x480
+Projectile - 16x16
