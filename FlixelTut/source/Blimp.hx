@@ -80,13 +80,13 @@
 			
 			//For diagonal movements to keep blimp on the screen
 			if ( ((_up && _right) && (this.y > 5 && this.x < 502)) || ((_up && _left) && (this.y > 5 && this.x > 7)) ||
-			((_down && _right) && (this.y < 411 && this.x < 502)) || ((_down && _left) && (this.y < 411 && this.x > 7)) ){
+			((_down && _right) && (this.y < 250 && this.x < 502)) || ((_down && _left) && (this.y < 250 && this.x > 7)) ){
 				velocity.set(_speed, 0);
 				velocity.rotate(FlxPoint.weak(0, 0), angle);
 		    }
 			
 			//for straight up/down/left/right movements to keep blimp on the screen
-			else if ( (_up && this.y > 5 && !_left && !_right) || (_down && this.y < 411 && !_left && !_right) || 
+			else if ( (_up && this.y > 5 && !_left && !_right) || (_down && this.y < 135 && !_left && !_right) || 
 			(_left && this.x > 7 && !_up && !_down) || (_right && this.x < 502 && !_up && !_down) ){
 				velocity.set(_speed, 0);
 				velocity.rotate(FlxPoint.weak(0, 0), angle);	

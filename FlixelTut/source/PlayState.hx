@@ -46,7 +46,7 @@ class PlayState extends FlxState
 		_blimp = new Blimp(20, 20);
 		add(_blimp);
 		_blimp.x = 40;
-		_blimp.y = 100;
+		_blimp.y = 60;
 		
 		super.create();
 	}
