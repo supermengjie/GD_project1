@@ -40,7 +40,7 @@ class PlayState extends FlxState
 		_birdsArray= new FlxTypedGroup<Birds>();
 		add(_birdsArray);
 
-		spawn.start(FlxG.random.float(4.0, 8.0), birdSpawner, 3);
+		spawn.start(FlxG.random.float(1.0, 2.0), birdSpawner, 0);
 		super.create();
 	}
 
@@ -92,8 +92,7 @@ class PlayState extends FlxState
 		_bird = new Birds(FlxG.random.int(400, 620), 360, "flock");
 		add(_bird);
 		_birdsArray.add(_bird);
-		//_bird.velocity.set(_scrollSpeed, 0);
-		_bird.velocity.set(0, 0);
+		_bird.velocity.set(_scrollSpeed, 0);
 	}
 
 
@@ -101,27 +100,29 @@ class PlayState extends FlxState
 	{
 		var sprite1Class:String = Type.getClassName(Type.getClass(Sprite1));
 		var sprite2Class:String = Type.getClassName(Type.getClass(Sprite2));
-		if(sprite1Class == "Insult" && sprite2Class == "Birds"){
+		if (sprite1Class == "Insult" && sprite2Class == "Birds")
+		{
+				var s1: Dynamic = cast(Sprite1, Insult);
+				var s2: Dynamic = cast(Sprite2, Birds);
+				if (s2.status()==false){
+				_insults.remove(s1);
+				s2.velocity.set(200, -100);
+				s2.gotHit();
+				/*if (s2.x>620 && s2.y<190)
+				{
+					trace("out");
+					s2.velocity.set( -100, 0);
+				}
+				//removes it if it's off the screen
+				if (s2.x < 0) 
+				{
+					trace("kill");
+					s2.kill();
+				}	*/
 
-			var s1: Dynamic = cast(Sprite1, Insult);
-			var s2: Dynamic = cast(Sprite2, Birds);
-
-			_insults.remove(s1);
-			s2.velocity.set(200, -100);
-			/*if (s2.x>620 && s2.y<190)
-			{
-				trace("out");
-				s2.velocity.set( -100, 0);
+				s1.destroy();
+				return true;
 			}
-			//removes it if it's off the screen
-			if (s2.x < 0) 
-			{
-				trace("kill");
-				s2.kill();
-			}	*/
-
-			s1.destroy();
-			return true;
 
 		}
 

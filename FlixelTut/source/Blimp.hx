@@ -28,7 +28,7 @@
 	 {
 		 movement();
 
-		 if (FlxG.keys.justPressed.J)
+		 if (FlxG.keys.justPressed.SPACE)
 		 {
 		 	insult();
 		 }
