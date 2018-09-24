@@ -4,14 +4,16 @@
  import flixel.system.FlxAssets.FlxGraphicAsset;
  import flixel.FlxG;
  import flixel.math.FlxPoint;
+ import flixel.group.FlxGroup.FlxTypedGroup;
  import flixel.FlxObject;
 
  class Blimp extends FlxSprite
  {
 	
-	 var _speed : Float = 100;
+	 var _speed: Float = 200;
+	 var insultArray:FlxTypedGroup<Insult>;
 	 
-     public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
+     public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, blimpInsultArray: FlxTypedGroup<Insult>)
      {
          super(X, Y, SimpleGraphic);
 		 //drag slowly deaccelerates movement when it stops so it doesnt randomly stop
@@ -20,17 +22,22 @@
 		 facing = FlxObject.RIGHT;
 		 animation.add("blimpFloat", [0, 1, 2, 3, 4], 5, true);
 		 animation.play("blimpFloat");
+		 insultArray=blimpInsultArray;
      }
 	 
 	 override public function update(elapsed:Float):Void
 	 {
 		 movement();
+
+		 if (FlxG.keys.justPressed.SPACE)
+		 {
+		 	insult();
+		 }
 		 super.update(elapsed);
 	 }
 	 
 	 function movement():Void
 	{
-		//bools to determine which direction player is moving. Used to check screen boundaries and angles
 		var _up:Bool = false;
 		var _down:Bool = false;
 		var _left:Bool = false;
@@ -50,7 +57,6 @@
 			_left = _right = false;
 		}
 		
-		//determines the angle to rotate the speed on based on direction player is moving
 		if (_up || _down || _left || _right){
 			var angle:Float = 0;
 			if (_up){
@@ -93,5 +99,11 @@
 			}
 			
 		}
+	}
+
+	private function insult():Void{
+		var newInsult = new Insult(x+32, y+15, 200, FlxObject.RIGHT);
+		insultArray.add(newInsult);
+
 	}
  }
