@@ -84,7 +84,8 @@ class Level1State extends FlxState
 		FlxG.sound.play("assets/sounds/effects/blimp_sound.wav");
 		scroll();
 		FlxG.overlap(_insults, _birdsArray, null, collide);
-		
+		FlxG.overlap(_blimp, _birdsArray, null, collide);
+
 		if (FlxG.keys.justPressed.B){
 			decreaseTimer();
 		}
@@ -148,9 +149,19 @@ class Level1State extends FlxState
 				}	*/
 
 				s1.destroy();
-				return true;
+				
 			}
+			return true;
 
+		}
+
+		if (sprite1Class == "Blimp" && sprite2Class == "Birds")
+		{
+			var s1: Dynamic = cast(Sprite1, Blimp);
+			var s2: Dynamic = cast(Sprite2, Birds);
+			s2.dead();
+			//s2.detroy();
+			return true;
 		}
 
 		return false;

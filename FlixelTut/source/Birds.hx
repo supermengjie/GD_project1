@@ -13,6 +13,7 @@ class Birds extends FlxSprite
 {
 	var _speed : Float = 200;
 	var hit : Bool = false;
+	var isalive: Bool= true;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?BirdType:String, ?BirdSkin:FlxGraphicAsset) 
 	{
@@ -25,6 +26,16 @@ class Birds extends FlxSprite
 	{
 		hit = true;
 	}
+	public function dead():Void
+	{
+		
+		isalive=false;
+	}
+	/*public function killing():Void
+	{
+
+	}*/
+
 	public function status():Bool
 	{
 		return hit;
@@ -38,7 +49,7 @@ class Birds extends FlxSprite
 			velocity.set( -100, 0);
 		}
 		//removes it if it's off the screen
-		if (this.x < 0) 
+		if (this.x < 0 || isalive==false) 
 		{
 			trace("kill");
 			this.kill();
