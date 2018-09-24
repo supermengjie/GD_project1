@@ -18,7 +18,7 @@ package;
          super(X, Y, SimpleGraphic);
 		 _speed = Speed;
 		 direction=Direction;
-		 loadGraphic("assets/images/insult.png", true, 64, 64,true);
+		 loadGraphic("assets/images/Projectile_Sprite.png", true, 16, 16,true);
 		 
      }
 	 
