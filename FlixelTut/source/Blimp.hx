@@ -7,6 +7,8 @@
  import flixel.math.FlxPoint;
  import flixel.group.FlxGroup.FlxTypedGroup;
  import flixel.FlxObject;
+import flixel.text.FlxText;
+
 
  class Blimp extends FlxSprite
  {
@@ -109,6 +111,9 @@
 	private function insult():Void{
 		var newInsult = new Insult(x+32, y+15, 200, FlxObject.RIGHT);
 		insultArray.add(newInsult);
+		/*var text = "The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        var myText = new FlxText(100,400,150,text,12,false);
+        add(myText);*/
 
 	}
 	
