@@ -122,7 +122,7 @@ class Level2State extends FlxState
 		add(timer);
 		
 		//plays music
-		FlxG.sound.playMusic(AssetPaths.thangs__ogg);
+		FlxG.sound.playMusic(AssetPaths.level_2__ogg);
 		_blimpNoise = FlxG.sound.load("assets/sounds/effects/blimp_sound.wav");
 		
 		txt[0]=t1;
