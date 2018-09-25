@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.system.FlxSound;
 
 /**
  * ...
@@ -13,7 +14,9 @@ class Birds extends FlxSprite
 {
 	var _speed : Float = 200;
 	var hit : Bool = false;
-	var isalive: Bool= true;
+	var isalive: Bool = true;
+	var _birdnoise : FlxSound;
+	var gone: Bool =false;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?BirdType:String, ?BirdSkin:FlxGraphicAsset) 
 	{
@@ -21,6 +24,7 @@ class Birds extends FlxSprite
 		loadGraphic("assets/images/BirdFlock_SpriteSheet.png", true, 23, 20);
 		animation.add("birdMove", [0, 1, 0, 2], 8, true);
 		animation.play("birdMove");
+		_birdnoise = FlxG.sound.load("assets/sounds/effects/mad_bird.wav");
 	}
 	public function gotHit():Void
 	{
@@ -30,6 +34,11 @@ class Birds extends FlxSprite
 	{
 		
 		isalive=false;
+	}
+	public function endCall():Void
+	{
+		gone = true;
+		_birdnoise.stop();
 	}
 	/*public function killing():Void
 	{
@@ -42,7 +51,11 @@ class Birds extends FlxSprite
 	}
 	override public function update(elapsed:Float):Void
 	 {
-		 //once the bird hits the edge of the screen and is in the middle
+		if (hit && !(gone))
+		{
+			_birdnoise.play();
+		}	
+		//once the bird hits the edge of the screen and is in the middle
 		if (this.x>620 && this.y<190 && hit)
 		{
 			trace("out");

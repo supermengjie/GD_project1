@@ -7,6 +7,7 @@ import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 
 class Level1State extends FlxState
 {
@@ -25,6 +26,7 @@ class Level1State extends FlxState
 	var spawn : FlxTimer = new FlxTimer();
 	public var _birdsArray:FlxTypedGroup<Birds>;
 	var blimpShotCount : Int = 0;
+	var _blimpNoise : FlxSound;
 
 	override public function create():Void
 	{
@@ -76,13 +78,15 @@ class Level1State extends FlxState
 		timer.x = 550;
 		timer.y = 15;
 		add(timer);
-		
+		//plays music
+		FlxG.sound.playMusic(AssetPaths.thangs__ogg);
+		_blimpNoise=FlxG.sound.load("assets/sounds/effects/blimp_sound.wav");
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		FlxG.sound.play("assets/sounds/effects/blimp_sound.wav");
+		_blimpNoise.play();
 		scroll();
 		FlxG.overlap(_insults, _birdsArray, null, collide);
 		FlxG.overlap(_blimp, _birdsArray, null, collide);
@@ -159,8 +163,10 @@ class Level1State extends FlxState
 
 		if (sprite1Class == "Blimp" && sprite2Class == "Birds")
 		{
+			FlxG.sound.play("assets/sounds/effects/smack.wav");
 			var s1: Dynamic = cast(Sprite1, Blimp);
 			var s2: Dynamic = cast(Sprite2, Birds);
+			s2.endCall();
 			s2.dead();
 			increaseTimer();
 			//s2.detroy();
