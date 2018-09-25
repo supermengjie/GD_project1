@@ -37,6 +37,8 @@ class Level1State extends FlxState
 	var _nextLevelButton : FlxButton;
 	var _blimpNoise : FlxSound;
 	var _insult_txt:FlxTypedGroup<FlxText>;
+	var _ended : Bool = false;
+	var _killedScore : FlxText;
 
 	//testing
 	public var t1:String = "You lily-liveríd birds!";
@@ -64,7 +66,7 @@ class Level1State extends FlxState
  	public var t23:String = "You are unworthy to peck at even my father's eyes!";
  	public var t24:String = "Pox of humanity!";
  	public var t25:String = "Unclean bird-swine!";
- 	public var txt =new Array();
+ 	public var txt = new Array();
 
 
 
@@ -121,6 +123,9 @@ class Level1State extends FlxState
 		timer.x = 550;
 		timer.y = 15;
 		add(timer);
+		
+		_killedScore = new FlxText(20, 20, -1, "Kills: 0/15", 12);
+		add(_killedScore);
 		
 		//plays music
 		FlxG.sound.playMusic(AssetPaths.thangs__ogg);
@@ -181,7 +186,7 @@ class Level1State extends FlxState
 			blimpShotCount = _blimp.getShotCount();
 		}
 		if (curScale == 0 && _blimp.getInsults().countLiving() == 0){
-			if (!gameOverCheck()){
+			if (!gameOverCheck() && !_ended){
 				_blimp.kill();
 				fg.velocity.set(0, 0);
 				fg2.velocity.set(0, 0);
@@ -190,14 +195,15 @@ class Level1State extends FlxState
 				_ggText.loadGraphic("assets/images/Game-Over-Text.png", false, 606, 119);
 				add(_ggText);
 				_ggText.screenCenter();
-				_restartButton  = new FlxButton(20, 20, "Restart Level!", levelRestart);
+				_restartButton  = new FlxButton(290, 20, "Restart Level!", levelRestart);
 				add(_restartButton);
+				_ended = true;
 			}
 	   	}
 		
 		if (birdKillCount == 15){
 			spawnBird = false;
-			if (curScale > 0 && checkAliveBirds()){
+			if (curScale > 0 && !_ended){
 				fg.velocity.set(0, 0);
 				fg2.velocity.set(0, 0);
 				mg.velocity.set(0, 0);
@@ -205,8 +211,9 @@ class Level1State extends FlxState
 				_levelPassedText.loadGraphic("assets/images/Level-Passed-Text.png", false, 620, 114);
 				add(_levelPassedText);
 				_levelPassedText.screenCenter();
-				_nextLevelButton = new FlxButton(20, 20, "Next Level!", nextLevel);
+				_nextLevelButton = new FlxButton(290, 20, "Next Level!", nextLevel);
 				add(_nextLevelButton);
+				_ended = true;
 			}
 		}
 		super.update(elapsed);
@@ -282,6 +289,7 @@ class Level1State extends FlxState
 			s2.dead();
 			increaseTimer();
 			birdKillCount += 1;
+			_killedScore.text = ("Kills: " + birdKillCount + "/15");
 			//s2.detroy();
 			return true;
 		}
@@ -349,15 +357,5 @@ class Level1State extends FlxState
 				decreaseTimer(.1);
 			}
 		}
-	}
-	
-	function checkAliveBirds():Bool
-	{
-		for (bird in _birdsArray){
-			if (bird.getAlive()){
-				return false;
-			}
-		}
-		return true;
 	}
 }
