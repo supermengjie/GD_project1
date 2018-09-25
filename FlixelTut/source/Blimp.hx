@@ -13,12 +13,13 @@ import flixel.text.FlxText;
  class Blimp extends FlxSprite
  {
 	
-	 var _speed: Float = 200;
+	 var _speed: Float;
 	 var insultArray:FlxTypedGroup<Insult>;
 	 var shotCount : Int = 0; 
+	 var canShoot : Bool = true;
 	 
 	 
-     public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, blimpInsultArray: FlxTypedGroup<Insult>)
+     public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, blimpInsultArray: FlxTypedGroup<Insult>, speed : Float)
      {
          super(X, Y, SimpleGraphic);
 		 //drag slowly deaccelerates movement when it stops so it doesnt randomly stop
@@ -28,17 +29,17 @@ import flixel.text.FlxText;
 		 animation.add("blimpFloat", [0, 1, 2, 3, 4], 5, true);
 		 animation.play("blimpFloat");
 		 insultArray = blimpInsultArray;
+		 _speed = speed;
      }
 	 
 	 override public function update(elapsed:Float):Void
 	 {
 		 movement();
 
-		 if (FlxG.keys.justPressed.SPACE)
+		 if (FlxG.keys.justPressed.SPACE && canShoot)
 		 {
 		 	insult();
 			shotCount += 1;
-			trace(shotCount);
 		 }
 		 super.update(elapsed);
 	 }
@@ -121,4 +122,15 @@ import flixel.text.FlxText;
 	{
 		return shotCount;	
 	}
+	
+	public function getInsults():FlxTypedGroup<Insult>
+	{
+		return insultArray;		
+	}
+	
+	public function setCanShoot(input : Bool):Void
+	{
+		canShoot = input;
+	}
+	
  }

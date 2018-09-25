@@ -17,6 +17,8 @@ class Birds extends FlxSprite
 	var isalive: Bool = true;
 	var _birdnoise : FlxSound;
 	var gone: Bool =false;
+	var isalive: Bool = true;
+	var missedBird : Bool = false;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?BirdType:String, ?BirdSkin:FlxGraphicAsset) 
 	{
@@ -32,8 +34,9 @@ class Birds extends FlxSprite
 	}
 	public function dead():Void
 	{
-		
-		isalive=false;
+		this.kill();
+		isalive = false;
+		hit = false;
 	}
 	public function endCall():Void
 	{
@@ -49,6 +52,7 @@ class Birds extends FlxSprite
 	{
 		return hit;
 	}
+	
 	override public function update(elapsed:Float):Void
 	 {
 		if (hit && !(gone))
@@ -56,19 +60,39 @@ class Birds extends FlxSprite
 			_birdnoise.play();
 		}	
 		//once the bird hits the edge of the screen and is in the middle
+	{
+		 //once the bird hits the edge of the screen and is in the middle
 		if (this.x>620 && this.y<190 && hit)
 		{
-			trace("out");
+			//trace("out");
 			velocity.set( -100, 0);
 		}
 		//removes it if it's off the screen
 		if (this.x < 0 || isalive==false) 
 		{
-			trace("kill");
+			//trace("kill");
+			hit = false;
+			missedBird = true;
+			isalive = false;
 			this.kill();
 		}	
 		super.update(elapsed);
-	 }
+	}
+	
+	public function getMissedBird():Bool
+	{
+		if (missedBird){
+			missedBird = false;
+		return true;
+		}
+		return false;
+		
+	}
+	
+	public function getAlive():Bool
+	{
+		return isalive;
+	}
 	 
 	
 }

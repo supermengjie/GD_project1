@@ -38,5 +38,9 @@ package;
 		if(direction == FlxObject.CEILING){
 			velocity.y= -_speed;
 		}
+		
+		if (this.y > 360){
+			this.destroy();
+		}
 	 }
 }
