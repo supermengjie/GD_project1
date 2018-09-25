@@ -29,7 +29,7 @@ class Level1State extends FlxState
 	var spawn : FlxTimer = new FlxTimer();
 	public var _birdsArray:FlxTypedGroup<Birds>;
 	var blimpShotCount : Int = 0;
-	var birdSpawnCount : Int = 0;
+	var birdKillCount : Int = 0;
 	var spawnBird : Bool = true;
 	var _ggText : FlxSprite = new FlxSprite();
 	var _restartButton : FlxButton;
@@ -195,7 +195,7 @@ class Level1State extends FlxState
 			}
 	   	}
 		
-		if (birdSpawnCount == 5){
+		if (birdKillCount == 15){
 			spawnBird = false;
 			if (curScale > 0 && checkAliveBirds()){
 				fg.velocity.set(0, 0);
@@ -237,7 +237,6 @@ class Level1State extends FlxState
 			add(_bird);
 			_birdsArray.add(_bird);
 			_bird.velocity.set(_scrollSpeed, 0);
-			birdSpawnCount += 1;
 		}
 		
 	}
@@ -282,6 +281,7 @@ class Level1State extends FlxState
 			s2.endCall();
 			s2.dead();
 			increaseTimer();
+			birdKillCount += 1;
 			//s2.detroy();
 			return true;
 		}

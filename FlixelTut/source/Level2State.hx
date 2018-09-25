@@ -29,7 +29,7 @@ class Level2State extends FlxState
 	var spawn : FlxTimer = new FlxTimer();
 	public var _birdsArray:FlxTypedGroup<Birds>;
 	var blimpShotCount : Int = 0;
-	var birdSpawnCount : Int = 0;
+	var birdKillCount : Int = 0;
 	var spawnBird : Bool = true;
 	var _ggText : FlxSprite = new FlxSprite();
 	var _restartButton : FlxButton;
@@ -101,7 +101,7 @@ class Level2State extends FlxState
 		add(_insult_txt);
 		
 		//create the blimp object and assign its position
-		_blimp = new Blimp(20, 20, _insults, 100);
+		_blimp = new Blimp(20, 20, _insults, 150);
 		add(_blimp);
 		_blimp.x = 40;
 		_blimp.y = 60;
@@ -156,7 +156,7 @@ class Level2State extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		FlxG.sound.play("assets/sounds/effects/blimp_sound.wav");
+		_blimpNoise.play();
 		scroll();
 		FlxG.overlap(_insults, _birdsArray, null, collide);
 		FlxG.overlap(_blimp, _birdsArray, null, collide);
@@ -195,7 +195,7 @@ class Level2State extends FlxState
 			}
 	   	}
 		
-		if (birdSpawnCount == 5){
+		if (birdKillCount == 5){
 			spawnBird = false;
 			if (curScale > 0 && checkAliveBirds()){
 				fg.velocity.set(0, 0);
@@ -237,7 +237,6 @@ class Level2State extends FlxState
 			add(_bird);
 			_birdsArray.add(_bird);
 			_bird.velocity.set(_scrollSpeed, 0);
-			birdSpawnCount += 1;
 		}
 		
 	}
@@ -276,11 +275,13 @@ class Level2State extends FlxState
 
 		if (sprite1Class == "Blimp" && sprite2Class == "Birds")
 		{
+			FlxG.sound.play("assets/sounds/effects/smack.wav");
 			var s1: Dynamic = cast(Sprite1, Blimp);
 			var s2: Dynamic = cast(Sprite2, Birds);
 			s2.endCall();
 			s2.dead();
 			increaseTimer();
+			birdKillCount += 1; 
 			//s2.detroy();
 			return true;
 		}
