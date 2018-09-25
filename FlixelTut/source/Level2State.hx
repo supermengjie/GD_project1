@@ -9,6 +9,8 @@ import flixel.util.FlxTimer;
 import flixel.FlxObject;
 import flixel.math.FlxMath;
 import flixel.ui.FlxButton;
+import flixel.system.FlxSound;
+import flixel.text.FlxText;
 
 class Level2State extends FlxState
 {
@@ -33,6 +35,37 @@ class Level2State extends FlxState
 	var _restartButton : FlxButton;
 	var _levelPassedText : FlxSprite = new FlxSprite();
 	var _nextLevelButton : FlxButton;
+	var _blimpNoise : FlxSound;
+	var _insult_txt:FlxTypedGroup<FlxText>;
+
+	//testing
+	public var t1:String = "You lily-liveríd birds!";
+ 	public var t2:String = "You pigeon-livered gall-birds!";
+ 	public var t3:String = "I am sick when I look on thee!";
+ 	public var t4:String = "Poisonous bunch-backed toads!";
+ 	public var t5:String = "Thy feathers are not worth plucking!";
+ 	public var t6:String = "Thou art as fat as butter!";
+ 	public var t7:String = "Youíre unfit for any place but Hell!";
+ 	public var t8:String = "You cream-faced loons!";
+ 	public var t9:String = "Thou lump of foul deformity!";
+ 	public var t10:String = "Thy beak out-venomís all the worms of the Nile!";
+ 	public var t11:String = "Your brain is as dry as a saltine cracker!";
+ 	public var t12:String = "Avian, I hath plucked thy mother!";
+ 	public var t13:String = "You loggerheaded, hedge-born harpy!";
+ 	public var t14:String = "Frothy, elf-skinned flap-dragon!";
+ 	public var t15:String = "Paunchy, fly-bitten pig-nut!";
+ 	public var t16:String = "*INCOHERENT SCREECHING*";
+ 	public var t17:String = "Damn soft-beak!";
+ 	public var t18:String = "Featherbrained scoundrel!";
+ 	public var t19:String = "You talon-less cowards!";
+ 	public var t20:String = "Pinioned pigeon-brain!";
+ 	public var t21:String = "Rank, dog-hearted coxcomb!";
+ 	public var t22:String = "Crook-beaks!";
+ 	public var t23:String = "You are unworthy to peck at even my father's eyes!";
+ 	public var t24:String = "Pox of humanity!";
+ 	public var t25:String = "Unclean bird-swine!";
+ 	public var txt =new Array();
+
 
 	override public function create():Void
 	{
@@ -64,6 +97,9 @@ class Level2State extends FlxState
 		_insults = new FlxTypedGroup<Insult>();
 		add(_insults);
 		
+		_insult_txt = new FlxTypedGroup<FlxText>();
+		add(_insult_txt);
+		
 		//create the blimp object and assign its position
 		_blimp = new Blimp(20, 20, _insults, 100);
 		add(_blimp);
@@ -85,6 +121,36 @@ class Level2State extends FlxState
 		timer.y = 15;
 		add(timer);
 		
+		//plays music
+		FlxG.sound.playMusic(AssetPaths.thangs__ogg);
+		_blimpNoise = FlxG.sound.load("assets/sounds/effects/blimp_sound.wav");
+		
+		txt[0]=t1;
+ 		txt[1]=t2;
+ 		txt[2]=t3;
+ 		txt[3]=t4;
+ 		txt[4]=t5;
+ 		txt[5]=t6;
+ 		txt[6]=t7;
+ 		txt[7]=t8;
+ 		txt[8]=t9;
+ 		txt[9]=t10;
+ 		txt[10]=t11;
+ 		txt[11]=t12;
+ 		txt[12]=t13;
+ 		txt[13]=t14;
+ 		txt[14]=t15;
+ 		txt[15]=t16;
+ 		txt[16]=t17;
+ 		txt[17]=t18;
+ 		txt[18]=t19;
+ 		txt[19]=t20;
+ 		txt[20]=t21;
+ 		txt[21]=t22;
+ 		txt[22]=t23;
+ 		txt[23]=t24;
+ 		txt[24]=t25;
+		
 		super.create();
 	}
 
@@ -96,6 +162,20 @@ class Level2State extends FlxState
 		FlxG.overlap(_blimp, _birdsArray, null, collide);
 		checkMissedBird();
 
+		
+		if (FlxG.keys.justPressed.SPACE)
+		{
+			for(t in _insult_txt){
+				t.destroy();
+			}
+
+			var rint=FlxG.random.int(0,24);
+			//trace("rint:",rint);
+			var text = txt[rint];
+        	var myText = new FlxText(240,400,200,text,12,false);
+        	add(myText);
+        	_insult_txt.add(myText);
+		}
 		if (blimpShotCount != _blimp.getShotCount()){
 			decreaseTimer(.2);
 			blimpShotCount = _blimp.getShotCount();
@@ -198,6 +278,7 @@ class Level2State extends FlxState
 		{
 			var s1: Dynamic = cast(Sprite1, Blimp);
 			var s2: Dynamic = cast(Sprite2, Birds);
+			s2.endCall();
 			s2.dead();
 			increaseTimer();
 			//s2.detroy();

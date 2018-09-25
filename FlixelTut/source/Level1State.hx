@@ -121,10 +121,10 @@ class Level1State extends FlxState
 		timer.x = 550;
 		timer.y = 15;
 		add(timer);
+		
 		//plays music
 		FlxG.sound.playMusic(AssetPaths.thangs__ogg);
 		_blimpNoise=FlxG.sound.load("assets/sounds/effects/blimp_sound.wav");
-
 
 		txt[0]=t1;
  		txt[1]=t2;
