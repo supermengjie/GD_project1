@@ -4,7 +4,7 @@ package;
  import flixel.system.FlxAssets.FlxGraphicAsset;
  import flixel.FlxG;
  import flixel.math.FlxPoint;
-  import flixel.FlxObject;
+ import flixel.FlxObject;
 
  class Insult extends FlxSprite
  {

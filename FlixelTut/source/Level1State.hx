@@ -24,6 +24,7 @@ class Level1State extends FlxState
 	var _scrollSpeed : Float = -75;
 	var spawn : FlxTimer = new FlxTimer();
 	public var _birdsArray:FlxTypedGroup<Birds>;
+	var blimpShotCount : Int = 0;
 
 	override public function create():Void
 	{
@@ -86,8 +87,9 @@ class Level1State extends FlxState
 		FlxG.overlap(_insults, _birdsArray, null, collide);
 		FlxG.overlap(_blimp, _birdsArray, null, collide);
 
-		if (FlxG.keys.justPressed.B){
+		if (blimpShotCount != _blimp.getShotCount()){
 			decreaseTimer();
+			blimpShotCount = _blimp.getShotCount();
 		}
 		if (FlxG.keys.justPressed.N){
 			increaseTimer();
@@ -160,6 +162,7 @@ class Level1State extends FlxState
 			var s1: Dynamic = cast(Sprite1, Blimp);
 			var s2: Dynamic = cast(Sprite2, Birds);
 			s2.dead();
+			increaseTimer();
 			//s2.detroy();
 			return true;
 		}
@@ -169,7 +172,7 @@ class Level1State extends FlxState
 	}
 	
 	//if insult is shot decrease width of the timer and update hitbox
-	function decreaseTimer():Void
+	public function decreaseTimer():Void
 	{
 		if(curScale - .2 <= 0){
 			curScale = 0;

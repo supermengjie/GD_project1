@@ -1,6 +1,7 @@
  package;
 
  import flixel.FlxSprite;
+ import flixel.FlxState;
  import flixel.system.FlxAssets.FlxGraphicAsset;
  import flixel.FlxG;
  import flixel.math.FlxPoint;
@@ -12,6 +13,8 @@
 	
 	 var _speed: Float = 200;
 	 var insultArray:FlxTypedGroup<Insult>;
+	 var shotCount : Int = 0; 
+	 
 	 
      public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, blimpInsultArray: FlxTypedGroup<Insult>)
      {
@@ -22,7 +25,7 @@
 		 facing = FlxObject.RIGHT;
 		 animation.add("blimpFloat", [0, 1, 2, 3, 4], 5, true);
 		 animation.play("blimpFloat");
-		 insultArray=blimpInsultArray;
+		 insultArray = blimpInsultArray;
      }
 	 
 	 override public function update(elapsed:Float):Void
@@ -32,6 +35,8 @@
 		 if (FlxG.keys.justPressed.SPACE)
 		 {
 		 	insult();
+			shotCount += 1;
+			trace(shotCount);
 		 }
 		 super.update(elapsed);
 	 }
@@ -86,7 +91,7 @@
 			
 			//For diagonal movements to keep blimp on the screen
 			if ( ((_up && _right) && (this.y > 5 && this.x < 502)) || ((_up && _left) && (this.y > 5 && this.x > 7)) ||
-			((_down && _right) && (this.y < 250 && this.x < 502)) || ((_down && _left) && (this.y < 250 && this.x > 7)) ){
+			((_down && _right) && (this.y < 135 && this.x < 502)) || ((_down && _left) && (this.y < 135 && this.x > 7)) ){
 				velocity.set(_speed, 0);
 				velocity.rotate(FlxPoint.weak(0, 0), angle);
 		    }
@@ -105,5 +110,10 @@
 		var newInsult = new Insult(x+32, y+15, 200, FlxObject.RIGHT);
 		insultArray.add(newInsult);
 
+	}
+	
+	public function getShotCount():Int
+	{
+		return shotCount;	
 	}
  }
