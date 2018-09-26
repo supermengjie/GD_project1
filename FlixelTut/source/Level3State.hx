@@ -67,6 +67,12 @@ class Level3State extends FlxState
  	public var t24:String = "Pox of humanity!";
  	public var t25:String = "Unclean bird-swine!";
  	public var txt =new Array();
+ 	public var vt:String= "The HMZ Harbinger falls, crashing in the streets of London.
+The honorable men and women of her crew tragically perish, leaving London
+without her last line of defense against the vile Avian Horde.
+Kaiser Wilhelm seizes this opportunity - Britain surrenders by wintertime.
+
+The German Empire has won.";
 
 
 	override public function create():Void
@@ -192,7 +198,7 @@ class Level3State extends FlxState
 				fg2.velocity.set(0, 0);
 				mg.velocity.set(0, 0);
 				mg2.velocity.set(0, 0);
-				_ggText.loadGraphic("assets/images/Game-Over-Text.png", false, 606, 119);
+				_ggText.loadGraphic("assets/images/GameOver.png", false, 640, 200);
 				add(_ggText);
 				_ggText.screenCenter();
 				_restartButton  = new FlxButton(290, 20, "Restart Level!", levelRestart);
@@ -201,16 +207,24 @@ class Level3State extends FlxState
 			}
 	   	}
 		
-		if (birdKillCount == 15){
+		if (birdKillCount == 1){
 			spawnBird = false;
 			if (curScale > 0 && !_ended){
 				fg.velocity.set(0, 0);
 				fg2.velocity.set(0, 0);
 				mg.velocity.set(0, 0);
 				mg2.velocity.set(0, 0);
-				_levelPassedText.loadGraphic("assets/images/Level-Passed-Text.png", false, 620, 114);
+				_levelPassedText.loadGraphic("assets/images/Victory.png", false, 640, 200);
 				add(_levelPassedText);
 				_levelPassedText.screenCenter();
+
+				for(t in _insult_txt){
+					t.destroy();
+				}
+
+        		var myText = new FlxText(0,370,630,vt,12,false);
+        		add(myText);
+
 				_mainMenuButton = new FlxButton(290, 20, "Main Menu", mainMenu);
 				add(_mainMenuButton);
 				_ended = true;

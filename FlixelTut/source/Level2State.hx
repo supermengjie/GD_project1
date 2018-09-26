@@ -192,7 +192,7 @@ class Level2State extends FlxState
 				fg2.velocity.set(0, 0);
 				mg.velocity.set(0, 0);
 				mg2.velocity.set(0, 0);
-				_ggText.loadGraphic("assets/images/Game-Over-Text.png", false, 606, 119);
+				_ggText.loadGraphic("assets/images/GameOver.png", false, 640, 200);
 				add(_ggText);
 				_ggText.screenCenter();
 				_restartButton  = new FlxButton(290, 20, "Restart Level!", levelRestart);
@@ -208,7 +208,7 @@ class Level2State extends FlxState
 				fg2.velocity.set(0, 0);
 				mg.velocity.set(0, 0);
 				mg2.velocity.set(0, 0);
-				_levelPassedText.loadGraphic("assets/images/Level-Passed-Text.png", false, 620, 114);
+				_levelPassedText.loadGraphic("assets/images/LevelPassed.png", false, 640, 200);
 				add(_levelPassedText);
 				_levelPassedText.screenCenter();
 				_nextLevelButton = new FlxButton(290, 20, "Next Level!", nextLevel);
