@@ -11,10 +11,11 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Intro2State extends FlxState
 {
-	var _playButton: FlxButton;
+	var _continueButton: FlxButton;
 	var mytext:FlxText;
 	var _blimp : Blimp;
 	var _insults:FlxTypedGroup<Insult>;
+	var _added : Bool = false;
 	
 	override public function create():Void
 	{
@@ -43,17 +44,19 @@ Once you get their attention, just ram ëem out of the sky, got it?";
 	{
 
 
-		if(_blimp.x == 480)
+		if(_blimp.x == 480 && !_added)
 		{
-			var t=new FlxTimer().start(8.0, myCallback, 1);
+			_continueButton = new FlxButton(530, 440, "Continue", myCallback);
+			add(_continueButton);
+			_added = true;
 
-		}else{
+		}else if(!_added){
 			_blimp.x ++;
 		}
 		super.update(elapsed);
 	}
 	
-	function myCallback(Timer:FlxTimer):Void
+	function myCallback():Void
 	{
 		FlxG.switchState(new Level1State());
 	}

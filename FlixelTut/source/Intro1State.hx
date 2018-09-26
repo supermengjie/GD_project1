@@ -7,11 +7,14 @@ import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.system.FlxSound;
 
 class Intro1State extends FlxState
 {
-	var _playButton: FlxButton;
+	var _continueButton: FlxButton;
 	var mytext:FlxText;
+	var _added : Bool = false;
+	var _mainThemeSound : FlxSound;
 	
 	override public function create():Void
 	{
@@ -34,19 +37,19 @@ hopeful secret weaponÖ";
 
 	override public function update(elapsed:Float):Void
 	{
-
-
-		if(mytext.y == 0)
+		if(mytext.y == 0 && !_added)
 		{
 			mytext.y = 0;
-			var t=new FlxTimer().start(3.0, myCallback, 1);
-		}else{
+			_continueButton = new FlxButton(530, 440, "Continue", myCallback);
+			add(_continueButton);
+			_added = true;
+		}else if(!_added){
 			mytext.y--;
 		}
 		super.update(elapsed);
 	}
 	
-	function myCallback(Timer:FlxTimer):Void
+	function myCallback():Void
 	{
 		FlxG.switchState(new MenuState());
 	}
