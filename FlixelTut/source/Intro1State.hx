@@ -32,11 +32,13 @@ hopeful secret weaponÖ";
 		mytext= new FlxText(0,480,FlxG.width,text,16);
 		mytext.setFormat(null,14,FlxColor.RED,FlxTextAlign.CENTER);
 		add(mytext);
+		_mainThemeSound = FlxG.sound.load("assets/sounds/music/main_theme.ogg");
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
+		_mainThemeSound.play();
 		if(mytext.y == 0 && !_added)
 		{
 			mytext.y = 0;
