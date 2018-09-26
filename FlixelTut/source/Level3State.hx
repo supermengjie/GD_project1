@@ -207,7 +207,7 @@ The German Empire has won.";
 			}
 	   	}
 		
-		if (birdKillCount == 1){
+		if (birdKillCount == 15){
 			spawnBird = false;
 			if (curScale > 0 && !_ended){
 				fg.velocity.set(0, 0);
