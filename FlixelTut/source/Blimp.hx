@@ -1,12 +1,12 @@
- package;
+package;
 
- import flixel.FlxSprite;
- import flixel.FlxState;
- import flixel.system.FlxAssets.FlxGraphicAsset;
- import flixel.FlxG;
- import flixel.math.FlxPoint;
- import flixel.group.FlxGroup.FlxTypedGroup;
- import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.FlxState;
+import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.FlxG;
+import flixel.math.FlxPoint;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.FlxObject;
 import flixel.text.FlxText;
 
 

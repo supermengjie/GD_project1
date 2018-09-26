@@ -17,7 +17,6 @@ class Intro2State extends FlxState
 	var _blimp : Blimp;
 	var _insults:FlxTypedGroup<Insult>;
 	var _added : Bool = false;
-	var _mainThemeSound : FlxSound;
 	
 	override public function create():Void
 	{
@@ -39,13 +38,11 @@ Once you get their attention, just ram ëem out of the sky, got it?";
 		add(_blimp);
 		_blimp.x = 0;
 		_blimp.y = 0;
-		_mainThemeSound = FlxG.sound.load("assets/sounds/music/main_theme.ogg");
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		_mainThemeSound.play();
 
 		if(_blimp.x == 480 && !_added)
 		{

@@ -73,6 +73,11 @@ without her last line of defense against the vile Avian Horde.
 Kaiser Wilhelm seizes this opportunity - Britain surrenders by wintertime.
 
 The German Empire has won.";
+	public var endGame : String = "Soaring over the rooftops of London, the HMZ Harbinger and her fearless
+crew tear through the avian horde. Fritz is on the run as the sentient
+birds of Kaiser Wilhelm's secret weapons program scatter to the winds.
+
+The Great War may yet be won.";
 
 
 	override public function create():Void
@@ -133,7 +138,7 @@ The German Empire has won.";
 		add(_killedScore);
 		
 		//plays music
-		FlxG.sound.playMusic(AssetPaths.level_2__ogg);
+		FlxG.sound.playMusic(AssetPaths.main_theme__ogg);
 		_blimpNoise = FlxG.sound.load("assets/sounds/effects/blimp_sound.wav");
 		
 		txt[0]=t1;
@@ -201,6 +206,14 @@ The German Empire has won.";
 				_ggText.loadGraphic("assets/images/GameOver.png", false, 640, 200);
 				add(_ggText);
 				_ggText.screenCenter();
+				
+				for(t in _insult_txt){
+					t.destroy();
+				}
+
+        		var myText = new FlxText(0,370,630,vt,12,false);
+        		add(myText);
+				
 				_restartButton  = new FlxButton(290, 20, "Restart Level!", levelRestart);
 				add(_restartButton);
 				_ended = true;
@@ -217,14 +230,14 @@ The German Empire has won.";
 				_levelPassedText.loadGraphic("assets/images/Victory.png", false, 640, 200);
 				add(_levelPassedText);
 				_levelPassedText.screenCenter();
-
+				
 				for(t in _insult_txt){
 					t.destroy();
 				}
 
-        		var myText = new FlxText(0,370,630,vt,12,false);
+        		var myText = new FlxText(0,370,630,endGame,12,false);
         		add(myText);
-
+				
 				_mainMenuButton = new FlxButton(290, 20, "Main Menu", mainMenu);
 				add(_mainMenuButton);
 				_ended = true;

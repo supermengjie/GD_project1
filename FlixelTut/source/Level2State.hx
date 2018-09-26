@@ -66,7 +66,13 @@ class Level2State extends FlxState
  	public var t23:String = "You are unworthy to peck at even my father's eyes!";
  	public var t24:String = "Pox of humanity!";
  	public var t25:String = "Unclean bird-swine!";
- 	public var txt =new Array();
+ 	public var txt = new Array();
+	public var vt:String= "The HMZ Harbinger falls, crashing in the streets of London.
+The honorable men and women of her crew tragically perish, leaving London
+without her last line of defense against the vile Avian Horde.
+Kaiser Wilhelm seizes this opportunity - Britain surrenders by wintertime.
+
+The German Empire has won.";
 
 
 	override public function create():Void
@@ -195,6 +201,14 @@ class Level2State extends FlxState
 				_ggText.loadGraphic("assets/images/GameOver.png", false, 640, 200);
 				add(_ggText);
 				_ggText.screenCenter();
+				
+				for(t in _insult_txt){
+					t.destroy();
+				}
+
+        		var myText = new FlxText(0,370,630,vt,12,false);
+        		add(myText);
+				
 				_restartButton  = new FlxButton(290, 20, "Restart Level!", levelRestart);
 				add(_restartButton);
 				_ended = true;

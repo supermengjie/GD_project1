@@ -12,7 +12,7 @@ class MenuState extends FlxState
 	
 	override public function create():Void
 	{
-		_titleScreen.loadGraphic("assets/images/Title_Screen.png", false, 640, 480);
+		_titleScreen.loadGraphic("assets/images/Title_Screen2.png", false, 640, 480);
 		add(_titleScreen);
 		_playButton = new FlxButton(0, 0, "Play!", clickPlay);
 		_playButton.x = 530;
@@ -28,6 +28,6 @@ class MenuState extends FlxState
 	
 	function clickPlay():Void
 	{
-		FlxG.switchState(new Intro1State());
+		FlxG.switchState(new Intro2State());
 	}
 }
