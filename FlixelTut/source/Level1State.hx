@@ -347,7 +347,7 @@ class Level1State extends FlxState
 	
 	function nextLevel():Void
 	{
-		FlxG.switchState(new Level2State());
+		FlxG.switchState(new Intro3State());
 	}
 	
 	function checkMissedBird():Void
